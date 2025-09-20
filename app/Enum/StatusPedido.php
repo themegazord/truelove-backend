@@ -1,4 +1,5 @@
-<?php // app/Enums/StatusPedido.php
+<?php
+
 namespace App\Enums;
 
 enum StatusPedido: string

@@ -1,4 +1,5 @@
-<?php // app/Enums/StatusPagamento.php
+<?php
+
 namespace App\Enums;
 
 enum StatusPagamento: string

@@ -1,4 +1,4 @@
-<?php // app/Enums/TipoPromocao.php
+<?php
 namespace App\Enums;
 
 enum TipoPromocao: string

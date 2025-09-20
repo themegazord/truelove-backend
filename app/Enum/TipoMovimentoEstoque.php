@@ -1,4 +1,5 @@
-<?php // app/Enums/TipoMovimentoEstoque.php
+<?php
+ app/Enums/TipoMovimentoEstoque.php
 namespace App\Enums;
 
 enum TipoMovimentoEstoque: string

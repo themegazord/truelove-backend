@@ -1,4 +1,5 @@
-<?php // app/Enums/StatusProduto.php
+<?php
+ app/Enums/StatusProduto.php
 namespace App\Enums;
 
 enum StatusProduto: string

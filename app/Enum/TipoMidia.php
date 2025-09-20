@@ -1,4 +1,5 @@
-<?php // app/Enums/TipoMidia.php
+<?php
+ app/Enums/TipoMidia.php
 namespace App\Enums;
 
 enum TipoMidia: string

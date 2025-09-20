@@ -1,4 +1,4 @@
-<?php // app/Enums/StatusAvaliacao.php
+<?php
 namespace App\Enums;
 
 enum StatusAvaliacao: string
