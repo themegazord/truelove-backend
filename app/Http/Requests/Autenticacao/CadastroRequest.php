@@ -22,34 +22,36 @@ class CadastroRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => 'required|string|max:255',
+      'nome' => 'required|string|max:255',
       'email' => 'required|string|email|max:255|unique:users',
-      'password' => 'required|string',
-      'password_confirmation' => 'required|string|same:password',
+      'senha' => 'required|string',
+      'confirmarSenha' => 'required|string|same:senha',
       'telefone' => 'string|max:255',
       'nascimento' => 'date',
-      'cpf' => 'required|string|max:11|exists:perfis_clientes',
-      'consentimento_marketing' => 'boolean',
-      'endereco_padrao.rotulo' => 'string|max:255',
-      'endereco_padrao.nome' => 'string|max:255',
-      'endereco_padrao.telefone' => 'string|max:255',
-      'endereco_padrao.linha1' => 'required|string|max:255',
-      'endereco_padrao.linha2' => 'string|max:255',
-      'endereco_padrao.cidade' => 'string|max:255',
-      'endereco_padrao.uf' => 'string|max:2',
-      'endereco_padrao.cep' => 'required|string|max:8',
-      'endereco_padrao.pais' => 'required|string|max:255',
-      'endereco_padrao.padrao_envio' => 'boolean',
-      'endereco_padrao.padrao_cobranca' => 'boolean',
+      'cpf' => 'required|string|size:11|unique:perfis_clientes',
+      'consentimento' => 'boolean',
+      'endereco.rotulo' => 'string|max:255',
+      'endereco.nome' => 'string|max:255',
+      'endereco.telefone' => 'string|max:255',
+      'endereco.logradouro' => 'required|string|max:255',
+      'endereco.bairro' => 'string|max:255',
+      'endereco.numero' => 'string|max:255',
+      'endereco.complemento' => 'nullable|string|max:255',
+      'endereco.cidade' => 'string|max:255',
+      'endereco.uf' => 'string|max:2',
+      'endereco.cep' => 'required|string|size:8',
+      'endereco.pais' => 'string|max:255',
+      'endereco.padrao_envio' => 'boolean',
+      'endereco.padrao_cobranca' => 'boolean',
     ];
   }
 
   public function messages(): array
   {
     return [
-      'name.required' => 'O :attribute é obrigatório.',
-      'name.string' => 'O :attribute deve ser um texto.',
-      'name.max' => 'O :attribute não pode ultrapassar :max caracteres.',
+      'nome.required' => 'O :attribute é obrigatório.',
+      'nome.string' => 'O :attribute deve ser um texto.',
+      'nome.max' => 'O :attribute não pode ultrapassar :max caracteres.',
 
       'email.required' => 'O :attribute é obrigatório.',
       'email.string' => 'O :attribute deve ser um texto.',
@@ -57,77 +59,81 @@ class CadastroRequest extends FormRequest
       'email.max' => 'O :attribute não pode ultrapassar :max caracteres.',
       'email.unique' => 'Este :attribute já está em uso.',
 
-      'password.required' => 'A :attribute é obrigatória.',
-      'password.string' => 'A :attribute deve ser um texto.',
+      'senha.required' => 'A :attribute é obrigatória.',
+      'senha.string' => 'A :attribute deve ser um texto.',
 
-      'password_confirmation.required' => 'A :attribute é obrigatória.',
-      'password_confirmation.string' => 'A :attribute deve ser um texto.',
-      'password_confirmation.same' => 'A :attribute deve corresponder à senha.',
+      'confirmarSenha.required' => 'A :attribute é obrigatória.',
+      'confirmarSenha.string' => 'A :attribute deve ser um texto.',
+      'confirmarSenha.same' => 'A :attribute deve corresponder à senha.',
 
       'telefone.string' => 'O :attribute deve ser um texto.',
       'telefone.max' => 'O :attribute não pode ultrapassar :max caracteres.',
 
       'nascimento.date' => 'A :attribute deve ser uma data válida.',
 
-      'consentimento_marketing.boolean' => 'O :attribute deve ser verdadeiro ou falso.',
+      'cpf.required' => 'O :attribute é obrigatório.',
+      'cpf.string' => 'O :attribute deve ser um texto.',
+      'cpf.size' => 'O :attribute deve ter exatamente :size dígitos.',
+      'cpf.unique' => 'O :attribute já está em uso.',
 
-      'endereco_padrao.rotulo.string' => 'O :attribute deve ser um texto.',
-      'endereco_padrao.rotulo.max' => 'O :attribute não pode ultrapassar :max caracteres.',
+      'consentimento.boolean' => 'O :attribute deve ser verdadeiro ou falso.',
 
-      'endereco_padrao.nome.string' => 'O :attribute deve ser um texto.',
-      'endereco_padrao.nome.max' => 'O :attribute não pode ultrapassar :max caracteres.',
+      'endereco.rotulo.string' => 'O :attribute deve ser um texto.',
+      'endereco.rotulo.max' => 'O :attribute não pode ultrapassar :max caracteres.',
 
-      'endereco_padrao.telefone.string' => 'O :attribute deve ser um texto.',
-      'endereco_padrao.telefone.max' => 'O :attribute não pode ultrapassar :max caracteres.',
+      'endereco.nome.string' => 'O :attribute deve ser um texto.',
+      'endereco.nome.max' => 'O :attribute não pode ultrapassar :max caracteres.',
 
-      'endereco_padrao.linha1.required' => 'A :attribute é obrigatória.',
-      'endereco_padrao.linha1.string' => 'A :attribute deve ser um texto.',
-      'endereco_padrao.linha1.max' => 'A :attribute não pode ultrapassar :max caracteres.',
+      'endereco.telefone.string' => 'O :attribute deve ser um texto.',
+      'endereco.telefone.max' => 'O :attribute não pode ultrapassar :max caracteres.',
 
-      'endereco_padrao.linha2.string' => 'A :attribute deve ser um texto.',
-      'endereco_padrao.linha2.max' => 'A :attribute não pode ultrapassar :max caracteres.',
+      'endereco.logradouro.required' => 'O campo :attribute é obrigatório.',
+      'endereco.*.string' => 'O campo :attribute deve ser um texto.',
+      'endereco.*.max' => 'O campo :attribute deve ter no máximo :max caracteres.',
 
-      'endereco_padrao.cidade.string' => 'A :attribute deve ser um texto.',
-      'endereco_padrao.cidade.max' => 'A :attribute não pode ultrapassar :max caracteres.',
+      'endereco.cidade.string' => 'A :attribute deve ser um texto.',
+      'endereco.cidade.max' => 'A :attribute não pode ultrapassar :max caracteres.',
 
-      'endereco_padrao.uf.string' => 'O :attribute deve ser um texto.',
-      'endereco_padrao.uf.max' => 'O :attribute deve ter no máximo :max caracteres.',
+      'endereco.uf.string' => 'O :attribute deve ser um texto.',
+      'endereco.uf.max' => 'O :attribute deve ter no máximo :max caracteres.',
 
-      'endereco_padrao.cep.required' => 'O :attribute é obrigatório.',
-      'endereco_padrao.cep.string' => 'O :attribute deve ser um texto.',
-      'endereco_padrao.cep.max' => 'O :attribute deve ter no máximo :max caracteres.',
+      'endereco.cep.required' => 'O :attribute é obrigatório.',
+      'endereco.cep.string' => 'O :attribute deve ser um texto.',
+      'endereco.cep.size' => 'O :attribute deve ter :size caracteres.',
 
-      'endereco_padrao.pais.required' => 'O :attribute é obrigatório.',
-      'endereco_padrao.pais.string' => 'O :attribute deve ser um texto.',
-      'endereco_padrao.pais.max' => 'O :attribute não pode ultrapassar :max caracteres.',
+      'endereco.pais.string' => 'O :attribute deve ser um texto.',
+      'endereco.pais.max' => 'O :attribute não pode ultrapassar :max caracteres.',
 
-      'endereco_padrao.padrao_envio.boolean' => 'O :attribute deve ser verdadeiro ou falso.',
-      'endereco_padrao.padrao_cobranca.boolean' => 'O :attribute deve ser verdadeiro ou falso.',
+      'endereco.padrao_envio.boolean' => 'O :attribute deve ser verdadeiro ou falso.',
+      'endereco.padrao_cobranca.boolean' => 'O :attribute deve ser verdadeiro ou falso.',
     ];
   }
 
   public function attributes(): array
   {
     return [
-      'name' => 'nome',
+      'nome' => 'nome',
       'email' => 'e-mail',
-      'password' => 'senha',
-      'password_confirmation' => 'confirmação de senha',
+      'senha' => 'senha',
+      'confirmarSenha' => 'confirmação de senha',
       'telefone' => 'telefone',
       'nascimento' => 'data de nascimento',
-      'consentimento_marketing' => 'consentimento de marketing',
+      'cpf' => 'CPF',
+      'consentimento' => 'consentimento de marketing',
 
-      'endereco_padrao.rotulo' => 'rótulo do endereço',
-      'endereco_padrao.nome' => 'nome do endereço',
-      'endereco_padrao.telefone' => 'telefone do endereço',
-      'endereco_padrao.linha1' => 'linha 1 do endereço',
-      'endereco_padrao.linha2' => 'linha 2 do endereço',
-      'endereco_padrao.cidade' => 'cidade do endereço',
-      'endereco_padrao.uf' => 'estado do endereço',
-      'endereco_padrao.cep' => 'CEP',
-      'endereco_padrao.pais' => 'país do endereço',
-      'endereco_padrao.padrao_envio' => 'padrão de envio',
-      'endereco_padrao.padrao_cobranca' => 'padrão de cobrança',
+      'endereco.rotulo' => 'rótulo do endereço',
+      'endereco.nome' => 'nome do endereço',
+      'endereco.telefone' => 'telefone do endereço',
+      'endereco.logradouro' => 'endereço',
+      'endereco.bairro' => 'bairro',
+      'endereco.numero' => 'número',
+      'endereco.complemento' => 'complemento',
+      'endereco.cidade' => 'cidade do endereço',
+      'endereco.uf' => 'estado (UF) do endereço',
+      'endereco.cep' => 'CEP',
+      'endereco.pais' => 'país do endereço',
+      'endereco.padrao_envio' => 'padrão de envio',
+      'endereco.padrao_cobranca' => 'padrão de cobrança',
     ];
   }
 }

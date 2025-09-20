@@ -24,11 +24,13 @@ return new class extends Migration {
       $table->string('rotulo')->nullable();
       $table->string('nome')->nullable();
       $table->string('telefone')->nullable();
-      $table->string('linha1');
-      $table->string('linha2')->nullable();
+      $table->string('logradouro');
+      $table->string('bairro')->nullable();
+      $table->string('numero')->nullable();
+      $table->string('complemento')->nullable();
       $table->string('cidade')->nullable();
-      $table->string('estado')->nullable();
-      $table->string('cep')->nullable();
+      $table->string('estado', 2)->nullable();
+      $table->string('cep', 8)->nullable();
       $table->string('pais', 2)->default('BR');
       $table->boolean('padrao_envio')->default(false);
       $table->boolean('padrao_cobranca')->default(false);

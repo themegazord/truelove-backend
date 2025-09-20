@@ -18,38 +18,37 @@ class CadastroService
     try {
       $perfil = DB::transaction(function () use ($dados) {
         $usuarioCadastro = User::query()->create([
-          'name' => $dados->get('name'),
+          'name' => $dados->get('nome'),
           'email' => $dados->get('email'),
-          'password' => Hash::make($dados->get('password')),
+          'password' => Hash::make($dados->get('senha')),
           'ativo' => true,
         ]);
 
         $perfilCadastrado = $usuarioCadastro->perfil()->create([
           'telefone' => $dados->get('telefone'),
           'cpf' => $dados->get('cpf'),
-          'nascimento' => $dados->get('data_nascimento'),
-          'consentimento_marketing' => $dados->get('consentimento_marketing'),
+          'nascimento' => $dados->get('nascimento'),
+          'consentimento_marketing' => $dados->get('consentimento'),
         ]);
 
-        $perfilCadastrado->enderecos()->createMany([
-          'rotulo' => $dados->get('endereco_padrao.rotulo'),
-          'nome' => $dados->get('endereco_padrao.nome'),
-          'telefone' => $dados->get('endereco_padrao.telefone'),
-          'linha1' => $dados->get('endereco_padrao.linha1'),
-          'linha2' => $dados->get('endereco_padrao.linha2'),
-          'cidade' => $dados->get('endereco_padrao.cidade'),
-          'uf' => $dados->get('endereco_padrao.uf'),
-          'cep' => $dados->get('endereco_padrao.cep'),
-          'pais' => $dados->get('endereco_padrao.pais'),
-          'padrao_envio' => $dados->get('endereco_padrao.padrao_envio'),
-          'padrao_cobranca' => $dados->get('endereco_padrao.padrao_cobranca'),
+
+        $endereco = $dados->get('endereco', []);
+
+        $perfilCadastrado->enderecos()->create([
+          'logradouro' => $endereco['logradouro'] ?? null,
+          'bairro' => $endereco['bairro'] ?? null,
+          'numero' => $endereco['numero'] ?? null,
+          'complemento' => $endereco['complemento'] ?? null,
+          'cidade' => $endereco['cidade'] ?? null,
+          'estado' => $endereco['uf'] ?? null, // se sua regra usa `endereco.uf`
+          'cep' => $endereco['cep'] ?? null,
         ]);
 
         return $perfilCadastrado;
 
       });
     } catch (\Exception $e) {
-      throw new \Exception("Aconteceu algum problema no cadastro do cliente, por favor, entrar em contato com suporte", Response::HTTP_INTERNAL_SERVER_ERROR);
+      throw new \Exception("Aconteceu algum problema no cadastro do cliente, por favor, entrar em contato com suporte" . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     return $perfil->load('enderecos');
