@@ -23,7 +23,11 @@ class User extends Authenticatable
     'name',
     'email',
     'password',
-    'ativo'
+    'ativo',
+    'telefone',
+    'cpf',
+    'nascimento',
+    'consentimento_marketing'
   ];
 
   /**
