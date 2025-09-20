@@ -12,7 +12,7 @@ class PerfilCliente extends Model
   use HasUlids;
 
   protected $table = 'perfis_clientes';
-  protected $fillable = ['user_id', 'telefone', 'nascimento', 'consentimento_marketing', 'endereco_padrao_id'];
+  protected $fillable = ['user_id', 'cpf', 'telefone', 'nascimento', 'consentimento_marketing', 'endereco_padrao_id'];
   protected $casts = ['consentimento_marketing' => 'bool', 'nascimento' => 'date'];
 
   public function user(): BelongsTo
