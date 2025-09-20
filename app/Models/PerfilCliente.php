@@ -12,12 +12,12 @@ class PerfilCliente extends Model
   use HasUlids;
 
   protected $table = 'perfis_clientes';
-  protected $fillable = ['usuario_id', 'telefone', 'nascimento', 'consentimento_marketing', 'endereco_padrao_id'];
+  protected $fillable = ['user_id', 'telefone', 'nascimento', 'consentimento_marketing', 'endereco_padrao_id'];
   protected $casts = ['consentimento_marketing' => 'bool', 'nascimento' => 'date'];
 
-  public function usuario(): BelongsTo
+  public function user(): BelongsTo
   {
-    return $this->belongsTo(User::class, 'usuario_id');
+    return $this->belongsTo(User::class, 'user_id');
   }
 
   public function enderecos(): HasMany

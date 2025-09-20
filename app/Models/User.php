@@ -51,11 +51,11 @@ class User extends Authenticatable
 
   public function roles(): BelongsToMany
   {
-    return $this->belongsToMany(Role::class, 'usuario_role');
+    return $this->belongsToMany(Role::class, 'user_role');
   }
 
   public function perfil(): HasOne
   {
-    return $this->hasOne(PerfilCliente::class, 'usuario_id');
+    return $this->hasOne(PerfilCliente::class, 'user_id');
   }
 }

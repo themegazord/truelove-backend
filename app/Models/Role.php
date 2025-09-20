@@ -12,9 +12,9 @@ class Role extends Model
   protected $table = 'roles';
   protected $fillable = ['nome', 'descricao'];
 
-  public function usuarios(): BelongsToMany
+  public function users(): BelongsToMany
   {
-    return $this->belongsToMany(User::class, 'usuario_role');
+    return $this->belongsToMany(User::class, 'user_role');
   }
 
   public function permissoes(): BelongsToMany

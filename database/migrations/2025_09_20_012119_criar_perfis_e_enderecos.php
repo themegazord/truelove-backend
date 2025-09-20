@@ -9,7 +9,7 @@ return new class extends Migration {
   {
     Schema::create('perfis_clientes', function (Blueprint $table) {
       $table->ulid('id')->primary();
-      $table->foreignUlid('usuario_id')->nullable()->constrained('usuarios')->nullOnDelete();
+      $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
       $table->string('telefone')->nullable();
       $table->date('nascimento')->nullable();
       $table->boolean('consentimento_marketing')->default(false);

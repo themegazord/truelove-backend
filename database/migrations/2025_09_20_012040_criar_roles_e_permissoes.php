@@ -21,10 +21,10 @@ return new class extends Migration {
       $table->timestamps();
     });
 
-    Schema::create('usuario_role', function (Blueprint $table) {
-      $table->foreignUlid('usuario_id')->constrained('usuarios')->cascadeOnDelete();
+    Schema::create('user_role', function (Blueprint $table) {
+      $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
       $table->foreignUlid('role_id')->constrained('roles')->cascadeOnDelete();
-      $table->primary(['usuario_id', 'role_id']);
+      $table->primary(['user_id', 'role_id']);
     });
 
     Schema::create('role_permissao', function (Blueprint $table) {
@@ -37,7 +37,7 @@ return new class extends Migration {
   public function down(): void
   {
     Schema::dropIfExists('role_permissao');
-    Schema::dropIfExists('usuario_role');
+    Schema::dropIfExists('user_role');
     Schema::dropIfExists('permissoes');
     Schema::dropIfExists('roles');
   }
