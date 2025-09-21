@@ -99,7 +99,7 @@ return [
     |
     | Affects: "dynamodb", "memcached", "redis"
     |
-    */
+      */
 
     'store' => env('SESSION_STORE'),
 

@@ -8,4 +8,10 @@ Route::prefix('v1')->group(function () {
     Route::post('cadastro', [\App\Http\Controllers\Autenticacao\CadastroController::class, 'store'])->name('autenticacao.cadastro');
     Route::post('login', [\App\Http\Controllers\Autenticacao\LoginController::class, 'store'])->name('autenticacao.login');
   });
+
+  Route::middleware('auth:sanctum')->group(function () {
+    Route::get('me', function (Request $request) {
+      return response()->json($request->user());
+    });
+  });
 });

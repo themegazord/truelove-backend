@@ -7,16 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginService
 {
-  public function store(Collection $dados): array
+  public function store(Collection $dados): bool
   {
-    $response = [
-      'token' => null
-    ];
+    $response = false;
     if (Auth::attempt([
       'email' => $dados->get('email'),
       'password' => $dados->get('password'),
     ], $dados->get('rememberMe', false))) {
-      $response['token'] = Auth::user()->createToken('truelove')->plainTextToken;
+      $response = true;
     }
 
     return $response;
