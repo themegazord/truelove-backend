@@ -13,5 +13,11 @@ Route::prefix('v1')->group(function () {
     Route::get('me', function (Request $request) {
       return response()->json($request->user());
     });
+    Route::post('logout', function (Request $request) {
+      \Illuminate\Support\Facades\Auth::guard('web')->logout();
+      $request->session()->invalidate();
+      $request->session()->regenerateToken();
+      return response()->noContent();
+    });
   });
 });
