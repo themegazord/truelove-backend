@@ -10,7 +10,17 @@ Route::prefix('v1')->group(function () {
   });
   Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', function (Request $request) {
-      return response()->json($request->user());
+      $user = $request->user()->load(['roles:id,nome']);
+
+      $roles = $user->roles->pluck('nome')->all();
+      return response()->json([
+        'user' => [
+          'id' => $user->id,
+          'name' => $user->name,
+          'email' => $user->email,
+        ],
+        'roles' => $roles,
+      ]);
     });
     Route::post('logout', function (Request $request) {
       \Illuminate\Support\Facades\Auth::guard('web')->logout();
