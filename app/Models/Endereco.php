@@ -11,7 +11,7 @@ class Endereco extends Model
   use HasUlids;
 
   protected $table = 'enderecos';
-  protected $fillable = ['cliente_id', 'rotulo', 'nome', 'telefone', 'logradouro', 'bairro', 'numero', 'complemento', 'cidade', 'estado', 'cep', 'pais', 'padrao_envio', 'padrao_cobranca'];
+  protected $fillable = ['rotulo', 'nome', 'telefone', 'logradouro', 'bairro', 'numero', 'complemento', 'cidade', 'estado', 'cep', 'pais', 'padrao_envio', 'padrao_cobranca'];
   protected $casts = ['padrao_envio' => 'bool', 'padrao_cobranca' => 'bool'];
 
   public function cliente(): BelongsTo
