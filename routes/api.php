@@ -28,5 +28,10 @@ Route::prefix('v1')->group(function () {
       $request->session()->regenerateToken();
       return response()->noContent();
     });
+    Route::prefix('estoque')->group(function () {
+      Route::prefix('localestoque')->group(function () {
+        Route::post('store', [\App\Http\Controllers\Estoque\LocalEstoqueController::class, 'store'])->name('localestoque.store');
+      });
+    });
   });
 });
