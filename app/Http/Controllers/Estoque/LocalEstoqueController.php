@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Estoque;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Estoque\LocalEstoque\StoreLocalEstoqueRequest;
+use App\Http\Resources\Estoque\LocalEstoqueResource;
+use App\Models\LocalEstoque;
 use App\Service\Estoque\LocalEstoque\CadastroService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,7 +18,11 @@ class LocalEstoqueController extends Controller
    */
   public function index()
   {
-    //
+    try {
+      return LocalEstoqueResource::collection(LocalEstoque::query()->paginate(5));
+    } catch (\Exception $e) {
+      return response()->json(['error' => 'Erro ao carregar os locais de estoque: ' . $e->getMessage()], 500);
+    }
   }
 
   /**

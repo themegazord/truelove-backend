@@ -31,6 +31,7 @@ Route::prefix('v1')->group(function () {
     Route::prefix('estoque')->group(function () {
       Route::prefix('localestoque')->group(function () {
         Route::post('store', [\App\Http\Controllers\Estoque\LocalEstoqueController::class, 'store'])->name('localestoque.store');
+        Route::get('index', [\App\Http\Controllers\Estoque\LocalEstoqueController::class, 'index'])->name('localestoque.index');
       });
     });
   });
