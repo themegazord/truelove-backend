@@ -11,7 +11,7 @@ class Categoria extends Model
   use HasUlids;
 
   protected $table = 'categorias';
-  protected $fillable = ['pai_id', 'slug', 'nome', 'descricao'];
+  protected $fillable = ['pai_id', 'slug', 'nome', 'descricao', 'metadata'];
 
   public function produtos(): BelongsToMany
   {
