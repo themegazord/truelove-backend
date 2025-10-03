@@ -33,6 +33,12 @@ Route::prefix('v1')->group(function () {
         Route::post('store', [\App\Http\Controllers\Estoque\LocalEstoqueController::class, 'store'])->name('localestoque.store');
         Route::get('index', [\App\Http\Controllers\Estoque\LocalEstoqueController::class, 'index'])->name('localestoque.index');
       });
+      Route::prefix('categoria')->group(function () {
+        Route::get('index', [\App\Http\Controllers\Estoque\CategoriaController::class, 'index'])->name('categoria.index');
+        Route::post('store', [\App\Http\Controllers\Estoque\CategoriaController::class, 'store'])->name('categoria.store');
+      });
+
+
     });
   });
 });
